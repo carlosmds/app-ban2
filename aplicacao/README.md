@@ -2,7 +2,7 @@
 
 Comando Docker: `docker-compose up -d`
 
-É um requisito que as portas 80, 3306 não estejam sendo utilizadas. 
+É um requisito que as portas 80, 3306 estejam livres. 
 
 Após subir o ambiente estará disponível em: http://localhost/
 
