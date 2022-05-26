@@ -16,7 +16,7 @@ class PurchaseSeeder extends Seeder
     {
         DB::table('purchases')->insert([
             [
-                'discount'    => 0.25,
+                'discount'    => 25,
             ],[
                 'discount'    => null,
             ],

@@ -80,6 +80,11 @@ class OrderItemController extends Controller
      */
     public function destroy(OrderItem $orderItem)
     {
-        //
+        // Delete model
+        $orderItem->delete();
+        // Delete related purchases
+        $orderItem->purchase()->delete();
+        // Delete related rentals
+        $orderItem->rental()->delete();
     }
 }

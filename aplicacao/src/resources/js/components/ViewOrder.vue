@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="col-md-4 mx-auto">
-            <h1>Order view</h1>
+        <div class="col-md-3 mx-auto">
+            <h1>View Order</h1>
             <form @submit.prevent="update">
                 <div class="form-group">
                     <label>Customer</label>
@@ -48,12 +48,15 @@
                     <tr v-for="order_item in this.order_items" :key="order_item.id">
                         <td>{{ order_item.id }}</td>
                         <td>{{ order_item.game.name }}</td>
-                        <td>{{ order_item.purchase_id }}</td>
-                        <td>{{ order_item.rental_id }}</td>
+                        <td>
+                            <router-link v-if="order_item.purchase_id" :to="{name: 'view-purchase', params: { purchase_id: order_item.purchase_id }}">Purchase #{{ order_item.purchase_id }}</router-link>
+                        </td>
+                        <td>
+                            <router-link v-if="order_item.rental_id" :to="{name: 'view-rental', params: { rental_id: order_item.rental_id }}">Rental #{{ order_item.rental_id }}</router-link>
+                        </td>
                         <td>
                             <div class="btn-group" role="group">
                                 <button class="btn btn-danger" @click="deleteOrderItem(order_item.id)">Delete</button>
-                                <button class="btn btn-info" @click="editOrderItem(order_item.id)">Edit</button>
                             </div>
                         </td>
                     </tr>
@@ -66,8 +69,13 @@
 <script>
     export default {
         methods: {
-            deleteOrderItem() {
-
+            deleteOrderItem(id) {
+                this.axios
+                   .delete(`http://localhost/api/order-items/${id}`)
+                    .then(response => {
+                        alert("order item deleted!")
+                        this.$router.push('/orders')
+                    });
             },
             update() { 
                 this.axios

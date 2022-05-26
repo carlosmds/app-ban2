@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderItem;
 use App\Models\Rental;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,17 @@ class RentalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rental = Rental::create([
+            'days_of_rent' => $request->get('data')['days_of_rent'],
+        ]);
+
+        $order_item = OrderItem::create([
+            'rental_id' => $rental->id,
+            'order_id' => $request->get('data')['order_id'],
+            'game_id' => $request->get('data')['game_id'],
+        ]);
+
+        return $order_item->load('rental');
     }
 
     /**
@@ -46,7 +57,7 @@ class RentalController extends Controller
      */
     public function show(Rental $rental)
     {
-        //
+        return $rental->attributesToArray();
     }
 
     /**
@@ -69,7 +80,7 @@ class RentalController extends Controller
      */
     public function update(Request $request, Rental $rental)
     {
-        //
+        return $rental->update($request->get('data'));
     }
 
     /**
@@ -80,6 +91,6 @@ class RentalController extends Controller
      */
     public function destroy(Rental $rental)
     {
-        //
+        $rental->delete();
     }
 }

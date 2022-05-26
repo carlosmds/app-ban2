@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderItem;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,17 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $purchase = Purchase::create([
+            'discount' => $request->get('data')['discount'],
+        ]);
+
+        $order_item = OrderItem::create([
+            'purchase_id' => $purchase->id,
+            'order_id' => $request->get('data')['order_id'],
+            'game_id' => $request->get('data')['game_id'],
+        ]);
+
+        return $order_item->load('purchase');
     }
 
     /**
@@ -46,7 +57,7 @@ class PurchaseController extends Controller
      */
     public function show(Purchase $purchase)
     {
-        //
+        return $purchase->attributesToArray();
     }
 
     /**
@@ -69,7 +80,7 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        //
+        return $purchase->update($request->get('data'));
     }
 
     /**
@@ -80,6 +91,6 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
     }
 }

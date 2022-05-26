@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-3 mx-auto">
             <h1>Orders</h1>
             <form @submit.prevent="search">
                 <div class="form-group">
@@ -12,9 +12,10 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
-                <router-link :to="{name: 'create-Order'}" class="btn btn-success">Create</router-link>
+                <router-link :to="{name: 'create-order'}" class="btn btn-success">Create</router-link>
             </form>
         </div>
+        <br>
         <br>
         <div class="col-md-6 mx-auto">
             <table class="table" :key="table">
@@ -33,7 +34,7 @@
                     <td>{{ order.customer.name }}</td>
                     <td>{{ order.description }}</td>
                     <td>
-                        <svg v-if="order.closed === true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                        <svg v-if="order.closed === 1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                         </svg>
                         <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
@@ -42,9 +43,8 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <router-link :disabled="closed === true" :to="{name: 'view-order', params: { id: order.id }}" class="btn btn-success">View</router-link>
-                            <button :disabled="closed === true" class="btn btn-danger" @click="deleteOrder(order.id)">Delete</button>
-                            <button :disabled="closed === true" class="btn btn-warning" @click="closeOrder(order.id)">Close</button>
+                            <router-link :disabled="order.closed === 1" :to="{name: 'view-order', params: { id: order.id }}" class="btn btn-success">View</router-link>
+                            <button :disabled="order.closed === 1" class="btn btn-danger" @click="deleteOrder(order.id)">Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -57,18 +57,6 @@
 <script>
     export default {
         methods: {
-            closeOrder(id) { 
-                this.axios
-                    .patch(`http://localhost/api/orders/${id}`, {
-                        data: {
-                            closed: true,
-                        }
-                    })
-                    .then(response => {
-                        alert("Order closed!")
-                        this.search()
-                    });
-            },
             deleteOrder(id) { 
                 this.axios
                     .delete(`http://localhost/api/orders/${id}`)

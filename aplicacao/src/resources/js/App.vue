@@ -6,6 +6,7 @@
                     <router-link to="/games" class="nav-item nav-link">Games</router-link>
                     <router-link to="/customers" class="nav-item nav-link">Customers</router-link>
                     <router-link to="/orders" class="nav-item nav-link">Orders</router-link>
+                    <router-link to="/orders/report" class="nav-item nav-link">Orders Report</router-link>
                 </div>
             </div>
         </nav>

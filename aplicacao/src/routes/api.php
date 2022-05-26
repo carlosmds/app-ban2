@@ -27,7 +27,8 @@ Route::middleware('api')->group(function () {
     Route::resource('games', GameController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('order-items', OrderItemController::class);
-    Route::resource('purchase', PurchaseController::class);
-    Route::resource('rental', RentalController::class);
+    Route::resource('purchases', PurchaseController::class);
+    Route::resource('rentals', RentalController::class);
 
+    Route::get('orders-report', 'App\Http\Controllers\OrderController@report');
 });

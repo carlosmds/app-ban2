@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Rental extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'days_of_rent',
+        'returned_at',
+    ];
 }

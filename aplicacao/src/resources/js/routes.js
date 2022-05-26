@@ -13,6 +13,11 @@ import ViewOrder from './components/ViewOrder.vue';
 import AddPurchase from './components/AddPurchase.vue';
 import AddRental from './components/AddRental.vue';
 
+import ViewPurchase from './components/ViewPurchase.vue';
+import ViewRental from './components/ViewRental.vue';
+
+import OrdersReport from './components/OrdersReport.vue';
+
 export const routes = [
     {
         name: 'games',
@@ -68,5 +73,20 @@ export const routes = [
         name: 'add-rental',
         path: '/orders/add-rental',
         component: AddRental
+    },
+    {
+        name: 'view-purchase',
+        path: '/orders/view-purchase',
+        component: ViewPurchase
+    },
+    {
+        name: 'view-rental',
+        path: '/orders/view-rental',
+        component: ViewRental
+    },
+    {
+        name: 'orders-report',
+        path: '/orders/report',
+        component: OrdersReport
     },
 ];
