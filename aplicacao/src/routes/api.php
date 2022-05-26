@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RentalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,16 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::middleware('api')->group(function () {
-    Route::post('lines-of-code','App\Http\Controllers\SoftwareController@getLinesOfCode');
-    Route::post('project-measure','App\Http\Controllers\SoftwareController@projectMeasure');
-    Route::post('agile-metrics','App\Http\Controllers\SoftwareController@agileMetrics');
-    Route::post('program-volume', 'App\Http\Controllers\SoftwareController@programVolume');
-    Route::post('algorithm-volume', 'App\Http\Controllers\SoftwareController@algorithmVolume');
-    Route::post('maturity', 'App\Http\Controllers\SoftwareController@maturity'); 
-    Route::post('integrity', 'App\Http\Controllers\SoftwareController@integrity'); 
+
+    Route::resource('customers', CustomerController::class);    
+    Route::resource('games', GameController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('order-items', OrderItemController::class);
+    Route::resource('purchase', PurchaseController::class);
+    Route::resource('rental', RentalController::class);
+
 });

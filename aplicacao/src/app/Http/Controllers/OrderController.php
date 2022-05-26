@@ -14,7 +14,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::query();
+
+        $customer_id_filter = request()->get('customer_id');
+
+        if ($customer_id_filter) $orders = $orders->where('customer_id', $customer_id_filter);
+
+        return $orders->with(['customer'])->get(); 
     }
 
     /**
@@ -35,7 +41,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Order::create($request->get('data'));
     }
 
     /**
@@ -46,7 +52,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return $order->load(['items.game', 'items.purchase', 'items.rental']);
     }
 
     /**
@@ -69,7 +75,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        return $order->update($request->get('data'));
     }
 
     /**
@@ -80,6 +86,6 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        return $order->delete();
     }
 }

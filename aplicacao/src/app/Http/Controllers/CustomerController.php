@@ -14,7 +14,15 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::query();
+
+        $customer_name_filter = request()->get('name');
+        $customer_document_filter = request()->get('document');
+
+        if ($customer_name_filter) $customers = $customers->where('name', 'like', "%$customer_name_filter%");
+        if ($customer_document_filter) $customers = $customers->where('document', 'like', "%$customer_document_filter%");
+
+        return $customers->get(); 
     }
 
     /**
@@ -35,7 +43,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Customer::create($request->get('data'));
     }
 
     /**
@@ -46,7 +54,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return $customer->attributesToArray();
     }
 
     /**
@@ -69,7 +77,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        return $customer->update($request->get('data'));
     }
 
     /**
@@ -80,6 +88,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        return $customer->delete();
     }
 }

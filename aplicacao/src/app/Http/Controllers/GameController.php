@@ -14,7 +14,13 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        $games = Game::query();
+
+        $game_name_filter = request()->get('name');
+
+        if ($game_name_filter) $games = Game::where('name', 'like', "%$game_name_filter%");
+
+        return $games->get(); 
     }
 
     /**
@@ -35,7 +41,7 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Game::create($request->get('data'));
     }
 
     /**
@@ -46,7 +52,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
+        return $game->attributesToArray();
     }
 
     /**
@@ -69,7 +75,7 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        //
+        return $game->update($request->get('data'));
     }
 
     /**
@@ -80,6 +86,6 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        return $game->delete();
     }
 }

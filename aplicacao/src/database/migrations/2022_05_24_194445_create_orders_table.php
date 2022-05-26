@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('customer_id')->index();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('description', 300);
+            $table->boolean('closed');
             $table->timestamps();
         });
     }
