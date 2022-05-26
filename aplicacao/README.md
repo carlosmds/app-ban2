@@ -4,7 +4,7 @@ Comando Docker: `docker-compose up -d`
 
 É um requisito que as portas 80, 3306 estejam livres. 
 
-Após subir o ambiente estará disponível em: http://localhost/
+Após executar o comando o ambiente estará disponível em: http://localhost/
 
 Talvez seja necessário ajustar as permissões das pastas. Para resolver execute o comando `chmod -R 777 .`
 
