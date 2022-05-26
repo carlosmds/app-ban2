@@ -83,7 +83,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (55,'2014_10_12_000000_create_users_table',1),(56,'2014_10_12_100000_create_password_resets_table',1),(57,'2019_08_19_000000_create_failed_jobs_table',1),(58,'2019_12_14_000001_create_personal_access_tokens_table',1),(59,'2022_05_24_194428_create_customers_table',1),(60,'2022_05_24_194445_create_orders_table',1),(61,'2022_05_24_194504_create_games_table',1),(62,'2022_05_24_194525_create_purchases_table',1),(63,'2022_05_24_194541_create_rentals_table',1),(64,'2022_05_24_194651_create_order_items_table',1);
+INSERT INTO `migrations` VALUES (16,'2014_10_12_000000_create_users_table',1),(17,'2014_10_12_100000_create_password_resets_table',1),(18,'2019_08_19_000000_create_failed_jobs_table',1),(19,'2019_12_14_000001_create_personal_access_tokens_table',1),(20,'2022_05_24_194428_create_customers_table',1),(21,'2022_05_24_194445_create_orders_table',1),(22,'2022_05_24_194504_create_games_table',1),(23,'2022_05_24_194525_create_purchases_table',1),(24,'2022_05_24_194541_create_rentals_table',1),(25,'2022_05_24_194651_create_order_items_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,6 +144,7 @@ CREATE TABLE `orders` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` bigint(20) unsigned NOT NULL,
   `description` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `closed` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -158,7 +159,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'Rental for user 1',NULL,NULL),(2,2,'Purchase and rentals for user 2',NULL,NULL),(3,3,'Purchase for user 3',NULL,NULL);
+INSERT INTO `orders` VALUES (1,1,'Rental for user 1',0,NULL,'2022-05-26 13:01:35'),(2,2,'Purchase and rentals for user 2',0,NULL,NULL),(3,3,'Purchase for user 3',1,NULL,'2022-05-26 13:01:25');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-25 21:00:44
+-- Dump completed on 2022-05-26 11:35:36
