@@ -1,11 +1,16 @@
-# aplicação PHP com Laravel e Docker
+# Aplicação PHP + MySQL com Laravel e Docker
 
-Docker usage:
+Comando Docker: `docker-compose up -d`
 
-Certify port 80 is not already in use. Then `docker-compose up -d`
+É um requisito que as portas 80, 3306 não estejam sendo utilizadas. 
 
-go-to: http://localhost:80/
+Após subir o ambiente estará disponível em: http://localhost/
 
-Run commands in containers:
+Talvez seja necessário ajustar as permissões das pastas. Para resolver execute o comando `chmod -R 777 .`
 
-`docker-compose run --rm` {composer,npm,artisan}
+Executar comandos de aplicações (composer,npm,artisan): `docker-compose run --rm {command}`
+Exemplos: 
+- `docker-compose run --rm composer install`
+- `docker-compose run --rm npm run watch`
+- `docker-compose run --rm artisan key:generate`
+
