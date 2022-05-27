@@ -17,6 +17,8 @@ import ViewPurchase from './components/ViewPurchase.vue';
 import ViewRental from './components/ViewRental.vue';
 
 import OrdersReport from './components/OrdersReport.vue';
+import GamesReport from './components/GamesReport.vue';
+import CustomersReport from './components/CustomersReport.vue';
 
 export const routes = [
     {
@@ -88,5 +90,15 @@ export const routes = [
         name: 'orders-report',
         path: '/orders/report',
         component: OrdersReport
+    },
+    {
+        name: 'games-report',
+        path: '/games/report',
+        component: GamesReport
+    },
+    {
+        name: 'customers-report',
+        path: '/customers/report',
+        component: CustomersReport
     },
 ];

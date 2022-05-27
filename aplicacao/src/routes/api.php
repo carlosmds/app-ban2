@@ -30,5 +30,7 @@ Route::middleware('api')->group(function () {
     Route::resource('purchases', PurchaseController::class);
     Route::resource('rentals', RentalController::class);
 
-    Route::get('orders-report', 'App\Http\Controllers\OrderController@report');
+    Route::get('orders-report', 'App\Http\Controllers\ReportController@orders');
+    Route::get('games-report', 'App\Http\Controllers\ReportController@games');
+    Route::get('customers-report', 'App\Http\Controllers\ReportController@customers');
 });

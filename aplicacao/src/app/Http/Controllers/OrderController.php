@@ -8,45 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function report()
-    {
-        $orders = Order::all();
-
-        $orderData = [];
-
-        foreach ($orders as $order) {
-
-            $rental_value = 0;
-            $purchase_value = 0;
-
-            foreach ($order->items as $order_item) {
-                
-                $rental = $order_item->rental ?? null;
-                $purchase = $order_item->purchase ?? null;
-
-                if ($rental) {
-                    $_rental_value = $order_item->game->day_rental_value;
-                    $rental_value += ($_rental_value * $rental->days_of_rent);
-                }
-
-                if ($purchase) {
-                    $_purchase_value = $order_item->game->value;
-                    if ($purchase->discount) $_purchase_value = ($_purchase_value * ($purchase->discount/100)); 
-                    $purchase_value += $_purchase_value;
-                }
-            }
-
-            $orderData[] = [
-                'order_id' => $order->id,
-                'items_quantity' => $order->items()->count(),
-                'rental_value' => $rental_value,
-                'purchase_value' => $purchase_value,
-            ];
-        }
-
-        return $orderData;
-    }
-
     /**
      * Display a listing of the resource.
      *
